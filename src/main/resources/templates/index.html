@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Add director</h1>
+<form action="/hollywood/director" method="GET">
+    <p>First name: <label>
+        <input type="text" name="first_name"/>
+    </label></p>
+    <p>Last name: <label>
+        <input type="text" name="last_name"/>
+    </label></p>
+    <p>Birth date: <label>
+        <input type="date" name="birth_date"/>
+    </label></p>
+    <input type="submit" value="Ok">
+</form>
+</body>
+</html>
