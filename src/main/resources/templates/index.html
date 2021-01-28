@@ -2,22 +2,34 @@
 <html lang="en">
 <head>
     <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <h1>Hollywood</h1>
-<h2>Add director</h2>
-<form action="/hollywood/director" method="GET">
-    <p>First name: <label>
-        <input type="text" name="first_name"/>
-    </label></p>
-    <p>Last name: <label>
-        <input type="text" name="last_name"/>
-    </label></p>
-    <p>Birth date: <label>
-        <input type="date" name="birth_date"/>
-    </label></p>
-    <input type="submit" value="Ok">
+<h2>Director</h2>
+<form action="/hollywood/create_director" method="GET">
+    <input type="submit" value="Add Director">
+</form>
+<br>
+<form action="/hollywood/delete_director" method="GET">
+    <input type="submit" value="Delete Director">
+</form>
+<br>
+<form action="/hollywood/read_director" method="GET">
+    <input type="submit" value="About Director">
+</form>
+
+<h2>Film</h2>
+<form action="/hollywood/create_film" method="GET">
+    <input type="submit" value="Add film">
+</form>
+<br>
+<form action="/hollywood/delete_film" method="GET">
+    <input type="submit" value="Delete film">
+</form>
+<br>
+<form action="/hollywood/read_film" method="GET">
+    <input type="submit" value="About film">
 </form>
 </body>
 </html>

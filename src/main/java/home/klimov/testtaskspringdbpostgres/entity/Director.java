@@ -1,6 +1,8 @@
 package home.klimov.testtaskspringdbpostgres.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import home.klimov.testtaskspringdbpostgres.Utils.CustomDateSerializer;
+import home.klimov.testtaskspringdbpostgres.constants.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +14,8 @@ import java.util.Date;
 @Entity
 @Table(name = "director")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Director {
     @Id
     @Column(name = "id")
@@ -27,7 +29,17 @@ public class Director {
     private String lastName;
 
     @Column(name = "birth_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = Constants.DATE_FORMAT)
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date birthDate;
+
+    @Override
+    public String toString() {
+        return
+                "Director: "
+                        + "ID: " + getId()
+                        + ", First name: " + getFirstName()
+                        + ", Last name: " + getLastName()
+                        + ", Birth date: " + getBirthDate();
+    }
 }

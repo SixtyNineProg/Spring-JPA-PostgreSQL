@@ -1,10 +1,8 @@
 package home.klimov.testtaskspringdbpostgres.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import home.klimov.testtaskspringdbpostgres.Utils.ObjectToJson;
 import home.klimov.testtaskspringdbpostgres.constants.Constants;
 import home.klimov.testtaskspringdbpostgres.entity.Director;
-import home.klimov.testtaskspringdbpostgres.entity.Film;
 import home.klimov.testtaskspringdbpostgres.repository.DirectorRepository;
 import home.klimov.testtaskspringdbpostgres.service.DirectorService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,25 +15,23 @@ import java.util.Optional;
 public class DirectorServiceImpl implements DirectorService {
 
     private final DirectorRepository directorRepository;
-    private final ObjectMapper objectMapper;
 
-    public DirectorServiceImpl(DirectorRepository directorRepository, ObjectMapper objectMapper) {
+    public DirectorServiceImpl(DirectorRepository directorRepository) {
         this.directorRepository = directorRepository;
-        this.objectMapper = objectMapper;
     }
 
     @Override
     public long create(Director director) {
         directorRepository.save(director);
-        log.info(Constants.DIRECTOR_SAVED, toJson(director));
+        log.info(Constants.DIRECTOR_SAVED, ObjectToJson.toJson(director));
         return director.getId();
     }
 
     @Override
     public Optional<Director> read(long id) {
         Optional<Director> director = directorRepository.findById(id);
-        director.ifPresent(data -> log.info(Constants.DIRECTOR_RECEIVED, id, toJson(director)));
-        return Optional.empty();
+        director.ifPresent(data -> log.info(Constants.DIRECTOR_RECEIVED, id, ObjectToJson.toJson(director.get())));
+        return director;
     }
 
     @Override
@@ -48,15 +44,5 @@ public class DirectorServiceImpl implements DirectorService {
         directorRepository.deleteById(id);
         log.info(Constants.DIRECTOR_DELETED, id);
         return true;
-    }
-
-    private synchronized String toJson(Object o) {
-        String json = null;
-        try {
-            json = objectMapper.writeValueAsString(o);
-        } catch (JsonProcessingException e) {
-            log.warn(Constants.ERROR_PARSING_OF_OBJECT, o.getClass().getSimpleName(), e.toString());
-        }
-        return json;
     }
 }
