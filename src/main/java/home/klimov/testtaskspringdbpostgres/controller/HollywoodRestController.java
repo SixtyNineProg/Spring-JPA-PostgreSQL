@@ -45,11 +45,16 @@ public class HollywoodRestController {
             @RequestParam(value = "last_name") String lastName,
             @RequestParam(value = "birth_date") Date birth_date) {
         try {
-            Director director = new Director();
-            director.setFirstName(firstName);
-            director.setLastName(lastName);
-            director.setBirthDate(birth_date);
-            return ResponseEntity.ok(directorService.create(director));
+            List<Director> directors = directorService.read(firstName, lastName, birth_date);
+            if (!directors.isEmpty()) {
+                return new ResponseEntity<>(Constants.DIRECTOR_ALREADY_EXIST + directors.get(0).getId(), HttpStatus.OK);
+            } else {
+                Director director = new Director();
+                director.setFirstName(firstName);
+                director.setLastName(lastName);
+                director.setBirthDate(birth_date);
+                return ResponseEntity.ok(directorService.create(director));
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
