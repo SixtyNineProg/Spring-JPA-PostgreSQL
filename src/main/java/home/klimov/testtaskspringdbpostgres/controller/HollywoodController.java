@@ -30,4 +30,14 @@ public class HollywoodController {
     public String createFilm() {
         return "create_film";
     }
+
+    @GetMapping("/delete_film")
+    public String deleteFilm() {
+        return "delete_film";
+    }
+
+    @GetMapping("/read_film")
+    public String readFilm() {
+        return "read_film";
+    }
 }

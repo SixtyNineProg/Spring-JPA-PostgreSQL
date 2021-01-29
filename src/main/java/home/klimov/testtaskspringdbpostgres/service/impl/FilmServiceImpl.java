@@ -32,8 +32,8 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public Optional<Film> read(long id) {
         Optional<Film> film = filmRepository.findById(id);
-        film.ifPresent(data -> log.info(Constants.FILM_RECEIVED, id, ObjectToJson.toJson(film)));
-        return Optional.empty();
+        film.ifPresent(data -> log.info(Constants.FILM_RECEIVED, id, film.get().toString()));
+        return film;
     }
 
     @Override

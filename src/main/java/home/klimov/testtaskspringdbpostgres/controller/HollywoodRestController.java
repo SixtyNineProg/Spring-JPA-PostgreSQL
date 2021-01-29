@@ -126,4 +126,22 @@ public class HollywoodRestController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/delete_film")
+    public ResponseEntity<?> deleteFilm(
+            @RequestParam(value = "id") long id) {
+        try {
+            return ResponseEntity.ok(filmService.delete(id));
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/read_film")
+    public ResponseEntity<?> readFilm(
+            @RequestParam(value = "id") long id) {
+        Optional<Film> film = filmService.read(id);
+        return film.map(value -> new ResponseEntity<>(value.toString(), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(Constants.FILM_NOT_FOUND_ID + id, HttpStatus.NOT_FOUND));
+    }
 }
