@@ -97,16 +97,26 @@ public class HollywoodRestController {
             @RequestParam(value = "release_date") Date release_date,
             @RequestParam(value = "genre") String genre) {
         try {
-            Director director = new Director();
-            director.setFirstName(firstName);
-            director.setLastName(lastName);
-            director.setBirthDate(birth_date);
-            Film film = new Film();
-            film.setDirector(director);
-            film.setName(name);
-            film.setReleaseDate(release_date);
-            film.setGenre(genre);
-            return ResponseEntity.ok(filmService.create(film));
+            List<Director> directors = directorService.read(firstName, lastName, birth_date);
+            if (!directors.isEmpty()) {
+                Film film = new Film();
+                film.setDirector(directors.get(0));
+                film.setName(name);
+                film.setReleaseDate(release_date);
+                film.setGenre(genre);
+                return ResponseEntity.ok(filmService.create(film));
+            } else {
+                Director director = new Director();
+                director.setFirstName(firstName);
+                director.setLastName(lastName);
+                director.setBirthDate(birth_date);
+                Film film = new Film();
+                film.setDirector(director);
+                film.setName(name);
+                film.setReleaseDate(release_date);
+                film.setGenre(genre);
+                return ResponseEntity.ok(filmService.create(film));
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

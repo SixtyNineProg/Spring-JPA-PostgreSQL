@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +56,17 @@ public class DirectorServiceImpl implements DirectorService {
                 director.getFirstName(),
                 director.getLastName(),
                 director.getBirthDate()
+        );
+        log.info(Constants.DIRECTORS_RECEIVED, directors.size());
+        return directors;
+    }
+
+    @Override
+    public List<Director> read(String firstName, String lastName, Date birthDate) {
+        List<Director> directors = directorRepository.findDirectorByAllFields(
+                firstName,
+                lastName,
+                birthDate
         );
         log.info(Constants.DIRECTORS_RECEIVED, directors.size());
         return directors;
