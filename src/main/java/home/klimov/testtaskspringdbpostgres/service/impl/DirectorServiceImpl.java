@@ -7,9 +7,12 @@ import home.klimov.testtaskspringdbpostgres.repository.DirectorRepository;
 import home.klimov.testtaskspringdbpostgres.service.DirectorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 @Slf4j
 public class DirectorServiceImpl implements DirectorService {
@@ -28,7 +31,7 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public Optional<Director> read(long id) {
+    public Optional<Director> readById(long id) {
         Optional<Director> director = directorRepository.findById(id);
         director.ifPresent(data -> log.info(Constants.DIRECTOR_RECEIVED, id, ObjectToJson.toJson(director.get())));
         return director;
@@ -44,5 +47,16 @@ public class DirectorServiceImpl implements DirectorService {
         directorRepository.deleteById(id);
         log.info(Constants.DIRECTOR_DELETED, id);
         return true;
+    }
+
+    @Override
+    public List<Director> read(Director director) {
+        List<Director> directors = directorRepository.findDirectorByAllFields(
+                director.getFirstName(),
+                director.getLastName(),
+                director.getBirthDate()
+        );
+        log.info(Constants.DIRECTORS_RECEIVED, directors.size());
+        return directors;
     }
 }

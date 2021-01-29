@@ -3,7 +3,9 @@ package home.klimov.testtaskspringdbpostgres.controller;
 import home.klimov.testtaskspringdbpostgres.Utils.ObjectToJson;
 import home.klimov.testtaskspringdbpostgres.constants.Constants;
 import home.klimov.testtaskspringdbpostgres.entity.Director;
+import home.klimov.testtaskspringdbpostgres.entity.Film;
 import home.klimov.testtaskspringdbpostgres.service.DirectorService;
+import home.klimov.testtaskspringdbpostgres.service.FilmService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +14,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class HollywoodRestController {
 
     private final DirectorService directorService;
+    private final FilmService filmService;
 
-    public HollywoodRestController(DirectorService directorService) {
+    public HollywoodRestController(DirectorService directorService, FilmService filmService) {
         this.directorService = directorService;
+        this.filmService = filmService;
     }
 
     @InitBinder
@@ -60,11 +65,50 @@ public class HollywoodRestController {
         }
     }
 
+    @PostMapping("/read_director_by_id")
+    public ResponseEntity<?> readDirectorById(
+            @RequestParam(value = "id") long id) {
+        Optional<Director> director = directorService.readById(id);
+        return director.map(value -> new ResponseEntity<>(ObjectToJson.toJson(value), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(Constants.DIRECTOR_NOT_FOUND_ID + id, HttpStatus.NOT_FOUND));
+    }
+
     @PostMapping("/read_director")
     public ResponseEntity<?> readDirector(
-            @RequestParam(value = "id") long id) {
-        Optional<Director> director = directorService.read(id);
-        return director.map(value -> new ResponseEntity<>(ObjectToJson.toJson(value), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(Constants.DIRECTOR_NOT_FOUND + id, HttpStatus.NOT_FOUND));
+            @RequestParam(value = "first_name") String firstName,
+            @RequestParam(value = "last_name") String lastName,
+            @RequestParam(value = "birth_date") Date birth_date) {
+        Director director = new Director();
+        director.setFirstName(firstName);
+        director.setLastName(lastName);
+        director.setBirthDate(birth_date);
+        List<Director> directors = directorService.read(director);
+        if (!directors.isEmpty()) {
+            return ResponseEntity.ok(ObjectToJson.toJson(directors.get(0).getId()));
+        } else return new ResponseEntity<>(Constants.DIRECTOR_NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/film")
+    public ResponseEntity<?> saveFilm(
+            @RequestParam(value = "first_name") String firstName,
+            @RequestParam(value = "last_name") String lastName,
+            @RequestParam(value = "birth_date") Date birth_date,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "release_date") Date release_date,
+            @RequestParam(value = "genre") String genre) {
+        try {
+            Director director = new Director();
+            director.setFirstName(firstName);
+            director.setLastName(lastName);
+            director.setBirthDate(birth_date);
+            Film film = new Film();
+            film.setDirector(director);
+            film.setName(name);
+            film.setReleaseDate(release_date);
+            film.setGenre(genre);
+            return ResponseEntity.ok(filmService.create(film));
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

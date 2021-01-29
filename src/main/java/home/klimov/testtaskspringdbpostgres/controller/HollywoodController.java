@@ -25,4 +25,9 @@ public class HollywoodController {
     public String readDirector() {
         return "read_director";
     }
+
+    @GetMapping("/create_film")
+    public String createFilm() {
+        return "create_film";
+    }
 }

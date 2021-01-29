@@ -2,18 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About Director</title>
+    <title>Title</title>
 </head>
 <body>
-<h1>About director</h1>
-<form action="/hollywood/read_director_by_id" method="POST">
-    <p>An identification number: <label>
-        <input type="number" name="id"/>
-    </label></p>
-    <input type="submit" value="Get info!">
-</form>
-<br>
-<form action="/hollywood/read_director" method="POST">
+<h1>Add film</h1>
+<form action="/hollywood/film" method="GET">
+    <p>Director:</p>
     <p>First name: <label>
         <input type="text" name="first_name"/>
     </label></p>
@@ -23,7 +17,17 @@
     <p>Birth date: <label>
         <input type="date" name="birth_date"/>
     </label></p>
-    <input type="submit" value="Get info!">
+    <p>Film:</p>
+    <p>Name: <label>
+        <input type="text" name="name"/>
+    </label></p>
+    <p>Release date: <label>
+        <input type="date" name="release_date"/>
+    </label></p>
+    <p>Genre: <label>
+        <input type="text" name="genre"/>
+    </label></p>
+    <input type="submit" value="Create">
 </form>
 <br>
 <form action="/hollywood" method="GET">

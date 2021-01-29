@@ -1,5 +1,6 @@
 package home.klimov.testtaskspringdbpostgres.Utils;
 
+import home.klimov.testtaskspringdbpostgres.constants.Constants;
 import home.klimov.testtaskspringdbpostgres.entity.Director;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ObjectToJsonTest {
 
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
 
     private Date date1 = simpleDateFormat.parse("1998-04-30");
 

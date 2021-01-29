@@ -23,8 +23,9 @@ public class Film {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "director_id")
-    private long directorId;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "director_id")
+    private Director director;
 
     @Column(name = "name")
     private String name;
