@@ -34,11 +34,20 @@
 
 <h2>Search film</h2>
 <form action="/hollywood/search" method="GET">
+    <p>Director last name : <label>
+        <input type="text" name="last_name"/>
+    </label></p>
     <p>date1: <label>
         <input type="date" name="date1"/>
     </label></p>
     <p>date2: <label>
         <input type="date" name="date2"/>
+    </label></p>
+    <input type="submit" value="Search!">
+</form>
+<form action="/hollywood/search_films_by_name" method="GET">
+    <p>Film name : <label>
+        <input type="text" name="name"/>
     </label></p>
     <input type="submit" value="Search!">
 </form>

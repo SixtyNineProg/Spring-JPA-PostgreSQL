@@ -54,4 +54,9 @@ public class FilmServiceImpl implements FilmService {
     public List<Film> searchFilmsBetweenDate(Date date1, Date date2) {
         return filmRepository.findFilmsBetweenDate(date1, date2);
     }
+
+    @Override
+    public List<Film> searchFilmsByDirectorLastName(String lastName) {
+        return filmRepository.findFilmsByDirectorLastName(lastName);
+    }
 }

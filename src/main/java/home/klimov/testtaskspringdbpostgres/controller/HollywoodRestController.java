@@ -4,6 +4,7 @@ import home.klimov.testtaskspringdbpostgres.Utils.ObjectToJson;
 import home.klimov.testtaskspringdbpostgres.constants.Constants;
 import home.klimov.testtaskspringdbpostgres.entity.Director;
 import home.klimov.testtaskspringdbpostgres.entity.Film;
+import home.klimov.testtaskspringdbpostgres.repository.impl.CustomRepositoryImpl;
 import home.klimov.testtaskspringdbpostgres.service.DirectorService;
 import home.klimov.testtaskspringdbpostgres.service.FilmService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -22,6 +23,7 @@ public class HollywoodRestController {
 
     private final DirectorService directorService;
     private final FilmService filmService;
+    private final CustomRepositoryImpl customRepository = new CustomRepositoryImpl();
 
     public HollywoodRestController(DirectorService directorService, FilmService filmService) {
         this.directorService = directorService;
@@ -147,9 +149,21 @@ public class HollywoodRestController {
 
     @GetMapping("/search")
     public ResponseEntity<?> searchFilmsBetweenDate(
-            @RequestParam(required = false, value = "date1", defaultValue = "2000-01-01") Date date1,
-            @RequestParam(required = false, value = "date2", defaultValue = "2006-01-01") Date date2) {
-        List<Film> films = filmService.searchFilmsBetweenDate(date1, date2);
+            @RequestParam(required = false, value = "last_name") String lastName,
+            @RequestParam(required = false, value = "date_from") Date dateFrom,
+            @RequestParam(required = false, value = "date_to") Date dateTo) {
+        List<Film> films = filmService.searchFilmsByDirectorLastName(lastName + "%");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Film film : films) {
+            stringBuilder.append(ObjectToJson.filmToJson(film));
+        }
+        return ResponseEntity.ok(ObjectToJson.toJson(stringBuilder));
+    }
+
+    @GetMapping("/search_films_by_name")
+    public ResponseEntity<?> searchFilmsByName(
+            @RequestParam(value = "name") String name) {
+        List<Film> films = customRepository.findFilmsByName(name);
         StringBuilder stringBuilder = new StringBuilder();
         for (Film film : films) {
             stringBuilder.append(ObjectToJson.filmToJson(film));

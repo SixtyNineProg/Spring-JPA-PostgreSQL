@@ -16,4 +16,6 @@ public interface FilmService {
     Boolean delete(long id);
 
     List<Film> searchFilmsBetweenDate(Date date1, Date date2);
+
+    List<Film> searchFilmsByDirectorLastName(String lastName);
 }

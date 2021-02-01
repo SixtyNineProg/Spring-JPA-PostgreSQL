@@ -16,4 +16,17 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
             @Param("date1") Date date1,
             @Param("date2") Date date2
     );
+
+    @Query(value =
+            "SELECT * FROM film f left join director d on f.director_id = d.id WHERE d.last_name like :last_name",
+            nativeQuery = true)
+    List<Film> findFilmsByDirectorLastName(@Param("last_name") String lastName);
+
+    List<Film> findFilmsByDirectorLastNameAndReleaseDateBetween(String lastName, Date dateFrom, Date dateTo);
+    List<Film> findFilmsByDirectorLastNameAndReleaseDateAfter(String lastName, Date dateFrom);
+    List<Film> findFilmsByDirectorLastNameAndReleaseDateBefore(String lastName, Date dateTo);
+    List<Film> findFilmsByReleaseDateBetween(Date dateFrom, Date dateTo);
+    List<Film> findFilmsByReleaseDateAfter(Date dateFrom);
+    List<Film> findFilmsByReleaseDateBefore(Date dateTo);
+
 }
