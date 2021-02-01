@@ -14,7 +14,7 @@ public interface DirectorRepository extends JpaRepository<Director, Long> {
             nativeQuery = true)
     List<Director> findDirectorByAllFields(
             @Param("first_name") String first_name,
-            @Param("last_name")String last_name,
-            @Param("birth_date")Date birth_date
+            @Param("last_name") String last_name,
+            @Param("birth_date") Date birth_date
     );
 }

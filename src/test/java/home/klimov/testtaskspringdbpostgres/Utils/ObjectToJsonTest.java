@@ -28,4 +28,18 @@ class ObjectToJsonTest {
         String jsonStr = ObjectToJson.toJson(director);
         assertEquals(expectedJsonStr, jsonStr);
     }
+
+    @Test
+    void testDate() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        System.out.println(formatter.format(date));
+    }
+
+    @Test
+    void testSearchFilm() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        System.out.println(formatter.format(date));
+    }
 }

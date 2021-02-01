@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -32,7 +34,7 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public Optional<Film> read(long id) {
         Optional<Film> film = filmRepository.findById(id);
-        film.ifPresent(data -> log.info(Constants.FILM_RECEIVED, id, film.get().toString()));
+        film.ifPresent(data -> log.info(Constants.FILM_RECEIVED, id, ObjectToJson.filmToJson(film.get())));
         return film;
     }
 
@@ -46,5 +48,10 @@ public class FilmServiceImpl implements FilmService {
         filmRepository.deleteById(id);
         log.info(Constants.FILM_DELETED, id);
         return true;
+    }
+
+    @Override
+    public List<Film> searchFilmsBetweenDate(Date date1, Date date2) {
+        return filmRepository.findFilmsBetweenDate(date1, date2);
     }
 }

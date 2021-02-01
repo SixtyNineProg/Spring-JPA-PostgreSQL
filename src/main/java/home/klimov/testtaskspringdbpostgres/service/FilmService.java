@@ -2,6 +2,8 @@ package home.klimov.testtaskspringdbpostgres.service;
 
 import home.klimov.testtaskspringdbpostgres.entity.Film;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public interface FilmService {
@@ -12,4 +14,6 @@ public interface FilmService {
     Boolean update(Film film);
 
     Boolean delete(long id);
+
+    List<Film> searchFilmsBetweenDate(Date date1, Date date2);
 }
