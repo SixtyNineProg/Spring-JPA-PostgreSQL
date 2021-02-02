@@ -1,6 +1,5 @@
 package home.klimov.testtaskspringdbpostgres.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import home.klimov.testtaskspringdbpostgres.constants.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +20,7 @@ public class Film {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "director_id")
     private Director director;
 

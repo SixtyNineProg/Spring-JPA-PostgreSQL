@@ -5,6 +5,7 @@ public class Constants {
     public static final String FILM_RECEIVED = "Film with id={} received successful : {}";
     public static final String FILM_DELETED = "Film with id={} deleted successful";
     public static final String FILM_NOT_FOUND_ID = "Not found film with id = ";
+    public static final String FILMS_NOT_FOUND = "No movies found for this request";
 
     public static final String DIRECTOR_SAVED = "Director saved successful : {}";
     public static final String DIRECTOR_ALREADY_EXIST = "Director with the given parameters already exist with id = ";
@@ -14,7 +15,6 @@ public class Constants {
 
     public static final String DIRECTOR_NOT_FOUND_ID = "Not found Director with id = ";
     public static final String DIRECTOR_NOT_FOUND = "Not found Director with the given parameters";
-
 
     public static final String DATE_FORMAT = "dd-MM-yyyy";
 

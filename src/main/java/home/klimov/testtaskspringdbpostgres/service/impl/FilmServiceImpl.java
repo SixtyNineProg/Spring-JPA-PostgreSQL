@@ -51,12 +51,42 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<Film> searchFilmsBetweenDate(Date date1, Date date2) {
-        return filmRepository.findFilmsBetweenDate(date1, date2);
+    public List<Film> searchFilmsByDirectorLastNameLike(String lastName) {
+        return filmRepository.findFilmsByDirectorLastLike(lastName);
     }
 
     @Override
-    public List<Film> searchFilmsByDirectorLastName(String lastName) {
-        return filmRepository.findFilmsByDirectorLastName(lastName);
+    public List<Film> searchFilmsByDirectorLastNameLikeAndReleaseDateAfter(String lastName, Date dateFrom) {
+        return filmRepository.findFilmsByDirectorLastNameLikeAndReleaseDateAfter(lastName, dateFrom);
+    }
+
+    @Override
+    public List<Film> searchFilmsByDirectorLastNameLikeAndReleaseDateBefore(String lastName, Date dateTo) {
+        return filmRepository.findFilmsByDirectorLastNameLikeAndReleaseDateBefore(lastName,dateTo);
+    }
+
+    @Override
+    public List<Film> searchFilmsByReleaseDateBetween(Date dateFrom, Date dateTo) {
+        return filmRepository.findFilmsByReleaseDateBetween(dateFrom, dateTo);
+    }
+
+    @Override
+    public List<Film> searchFilmsByDirectorLastNameLikeAndReleaseDateBetween(String lastName, Date dateFrom, Date dateTo) {
+        return filmRepository.findFilmsByDirectorLastNameLikeAndReleaseDateBetween(lastName, dateFrom, dateTo);
+    }
+
+    @Override
+    public List<Film> searchFilmsByReleaseDateBefore(Date dateTo) {
+        return filmRepository.findFilmsByReleaseDateBefore(dateTo);
+    }
+
+    @Override
+    public List<Film> searchFilmsByReleaseDateAfter(Date dateFrom) {
+        return filmRepository.findFilmsByReleaseDateAfter(dateFrom);
+    }
+
+    @Override
+    public List<Film> searchFilmsByNameLike(String name) {
+        return filmRepository.findFilmsByNameLike(name);
     }
 }

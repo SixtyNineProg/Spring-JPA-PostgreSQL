@@ -152,18 +152,35 @@ public class HollywoodRestController {
             @RequestParam(required = false, value = "last_name") String lastName,
             @RequestParam(required = false, value = "date_from") Date dateFrom,
             @RequestParam(required = false, value = "date_to") Date dateTo) {
-        List<Film> films = filmService.searchFilmsByDirectorLastName(lastName + "%");
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Film film : films) {
-            stringBuilder.append(ObjectToJson.filmToJson(film));
+        List<Film> films = null;
+        if (lastName != null && !lastName.equals("")) {
+            lastName = lastName.trim() + "%";
+            if (dateFrom == null)
+                if (dateTo == null) films = filmService.searchFilmsByDirectorLastNameLike(lastName);
+                else films = filmService.searchFilmsByDirectorLastNameLikeAndReleaseDateBefore(lastName, dateTo);
+            else if (dateTo == null)
+                films = filmService.searchFilmsByDirectorLastNameLikeAndReleaseDateAfter(lastName, dateFrom);
+            else films = filmService.searchFilmsByDirectorLastNameLikeAndReleaseDateBetween(lastName, dateFrom, dateTo);
+        } else {
+            if (dateFrom == null) {
+                if (dateTo != null) films = filmService.searchFilmsByReleaseDateBefore(dateTo);
+            } else if (dateTo == null) films = filmService.searchFilmsByReleaseDateAfter(dateFrom);
+            else films = filmService.searchFilmsByReleaseDateBetween(dateFrom, dateTo);
         }
-        return ResponseEntity.ok(ObjectToJson.toJson(stringBuilder));
+        if (films != null) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Film film : films) {
+                stringBuilder.append(ObjectToJson.filmToJson(film));
+            }
+            return ResponseEntity.ok(ObjectToJson.toJson(stringBuilder));
+        } else return new ResponseEntity<>(Constants.FILMS_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/search_films_by_name")
     public ResponseEntity<?> searchFilmsByName(
             @RequestParam(value = "name") String name) {
-        List<Film> films = customRepository.findFilmsByName(name);
+        name = name.trim() + "%";
+        List<Film> films = filmService.searchFilmsByNameLike(name);
         StringBuilder stringBuilder = new StringBuilder();
         for (Film film : films) {
             stringBuilder.append(ObjectToJson.filmToJson(film));
