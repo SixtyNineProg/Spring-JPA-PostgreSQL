@@ -13,16 +13,16 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
             "SELECT * " +
                     "FROM film f left join director d ON f.director_id = d.id " +
                     "WHERE " +
-                    "d.last_name LIKE :last_name",
+                    "lower(d.last_name) ILIKE lower(:last_name)",
             nativeQuery = true)
-    List<Film> findFilmsByDirectorLastLike(
+    List<Film> findFilmsByDirectorLastNameLike(
             @Param("last_name") String lastName);
 
     @Query(value =
             "SELECT * " +
                     "FROM film f left join director d ON f.director_id = d.id " +
                     "WHERE " +
-                    "d.last_name LIKE :last_name " +
+                    "lower(d.last_name) LIKE lower(:last_name) " +
                     "AND f.release_date > :date_from",
             nativeQuery = true)
     List<Film> findFilmsByDirectorLastNameLikeAndReleaseDateAfter(
@@ -33,7 +33,7 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
             "SELECT * " +
                     "FROM film f left join director d ON f.director_id = d.id " +
                     "WHERE " +
-                    "d.last_name LIKE :last_name " +
+                    "lower(d.last_name) LIKE lower(:last_name) " +
                     "AND f.release_date < :date_to",
             nativeQuery = true)
     List<Film> findFilmsByDirectorLastNameLikeAndReleaseDateBefore(
@@ -46,7 +46,7 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
             "SELECT * " +
                     "FROM film f left join director d ON f.director_id = d.id " +
                     "WHERE " +
-                    "d.last_name LIKE :last_name " +
+                    "lower(d.last_name) LIKE lower(:last_name) " +
                     "AND f.release_date BETWEEN :date_from AND :date_to",
             nativeQuery = true)
     List<Film> findFilmsByDirectorLastNameLikeAndReleaseDateBetween(
@@ -58,5 +58,5 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
 
     List<Film> findFilmsByReleaseDateAfter(Date dateFrom);
 
-    List<Film> findFilmsByNameLike(String name);
+    List<Film> findFilmsByNameLikeIgnoreCase(String name);
 }

@@ -52,41 +52,57 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public List<Film> searchFilmsByDirectorLastNameLike(String lastName) {
-        return filmRepository.findFilmsByDirectorLastLike(lastName);
+        List<Film> films = filmRepository.findFilmsByDirectorLastNameLike(lastName);
+        log.info(Constants.SEARCH_RESULT, films.size());
+        return films;
     }
 
     @Override
     public List<Film> searchFilmsByDirectorLastNameLikeAndReleaseDateAfter(String lastName, Date dateFrom) {
-        return filmRepository.findFilmsByDirectorLastNameLikeAndReleaseDateAfter(lastName, dateFrom);
+        List<Film> films = filmRepository.findFilmsByDirectorLastNameLikeAndReleaseDateAfter(lastName, dateFrom);
+        log.info(Constants.SEARCH_RESULT, films.size());
+        return films;
     }
 
     @Override
     public List<Film> searchFilmsByDirectorLastNameLikeAndReleaseDateBefore(String lastName, Date dateTo) {
-        return filmRepository.findFilmsByDirectorLastNameLikeAndReleaseDateBefore(lastName,dateTo);
+        List<Film> films = filmRepository.findFilmsByDirectorLastNameLikeAndReleaseDateBefore(lastName, dateTo);
+        log.info(Constants.SEARCH_RESULT, films.size());
+        return films;
     }
 
     @Override
     public List<Film> searchFilmsByReleaseDateBetween(Date dateFrom, Date dateTo) {
-        return filmRepository.findFilmsByReleaseDateBetween(dateFrom, dateTo);
+        List<Film> films = filmRepository.findFilmsByReleaseDateBetween(dateFrom, dateTo);
+        log.info(Constants.SEARCH_RESULT, films.size());
+        return films;
     }
 
     @Override
     public List<Film> searchFilmsByDirectorLastNameLikeAndReleaseDateBetween(String lastName, Date dateFrom, Date dateTo) {
-        return filmRepository.findFilmsByDirectorLastNameLikeAndReleaseDateBetween(lastName, dateFrom, dateTo);
+        List<Film> films = filmRepository.findFilmsByDirectorLastNameLikeAndReleaseDateBetween(lastName, dateFrom, dateTo);
+        log.info(Constants.SEARCH_RESULT, films.size());
+        return films;
     }
 
     @Override
     public List<Film> searchFilmsByReleaseDateBefore(Date dateTo) {
-        return filmRepository.findFilmsByReleaseDateBefore(dateTo);
+        List<Film> films = filmRepository.findFilmsByReleaseDateBefore(dateTo);
+        log.info(Constants.SEARCH_RESULT, films.size());
+        return films;
     }
 
     @Override
     public List<Film> searchFilmsByReleaseDateAfter(Date dateFrom) {
-        return filmRepository.findFilmsByReleaseDateAfter(dateFrom);
+        List<Film> films = filmRepository.findFilmsByReleaseDateAfter(dateFrom);
+        log.info(Constants.SEARCH_RESULT, films.size());
+        return films;
     }
 
     @Override
     public List<Film> searchFilmsByNameLike(String name) {
-        return filmRepository.findFilmsByNameLike(name);
+        List<Film> films = filmRepository.findFilmsByNameLikeIgnoreCase(name);
+        log.info(Constants.SEARCH_RESULT, films.size());
+        return films;
     }
 }

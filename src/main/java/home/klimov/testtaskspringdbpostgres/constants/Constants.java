@@ -6,6 +6,7 @@ public class Constants {
     public static final String FILM_DELETED = "Film with id={} deleted successful";
     public static final String FILM_NOT_FOUND_ID = "Not found film with id = ";
     public static final String FILMS_NOT_FOUND = "No movies found for this request";
+    public static final String SEARCH_RESULT = "Found {} results";
 
     public static final String DIRECTOR_SAVED = "Director saved successful : {}";
     public static final String DIRECTOR_ALREADY_EXIST = "Director with the given parameters already exist with id = ";
