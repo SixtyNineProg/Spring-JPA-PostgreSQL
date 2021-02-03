@@ -1,5 +1,6 @@
 package home.klimov.testtaskspringdbpostgres.service;
 
+import home.klimov.testtaskspringdbpostgres.entity.Director;
 import home.klimov.testtaskspringdbpostgres.entity.Film;
 
 import java.util.Date;
@@ -30,4 +31,6 @@ public interface FilmService {
     List<Film> searchFilmsByReleaseDateAfter(Date dateFrom);
 
     List<Film> searchFilmsByNameLike(String name);
+
+    List<Film> searchAllFilms();
 }

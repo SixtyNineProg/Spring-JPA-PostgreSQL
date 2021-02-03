@@ -17,4 +17,6 @@ public interface DirectorRepository extends JpaRepository<Director, Long> {
             @Param("last_name") String last_name,
             @Param("birth_date") Date birth_date
     );
+
+    List<Director> findDirectorBy();
 }

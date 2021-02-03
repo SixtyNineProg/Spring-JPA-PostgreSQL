@@ -2,6 +2,7 @@ package home.klimov.testtaskspringdbpostgres.service.impl;
 
 import home.klimov.testtaskspringdbpostgres.Utils.ObjectToJson;
 import home.klimov.testtaskspringdbpostgres.constants.Constants;
+import home.klimov.testtaskspringdbpostgres.entity.Director;
 import home.klimov.testtaskspringdbpostgres.entity.Film;
 import home.klimov.testtaskspringdbpostgres.repository.FilmRepository;
 import home.klimov.testtaskspringdbpostgres.service.FilmService;
@@ -102,6 +103,13 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public List<Film> searchFilmsByNameLike(String name) {
         List<Film> films = filmRepository.findFilmsByNameLikeIgnoreCase(name);
+        log.info(Constants.SEARCH_RESULT, films.size());
+        return films;
+    }
+
+    @Override
+    public List<Film> searchAllFilms() {
+        List<Film> films = filmRepository.findFilmBy();
         log.info(Constants.SEARCH_RESULT, films.size());
         return films;
     }

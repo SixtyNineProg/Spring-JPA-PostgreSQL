@@ -14,7 +14,7 @@ class ObjectToJsonTest {
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
 
-    private Date date1 = simpleDateFormat.parse("1998-04-30");
+    private Date date1 = simpleDateFormat.parse("30-04-1998");
 
     private Director director = new Director(1, "Dmitry", "Klimov", date1);
 
@@ -27,19 +27,5 @@ class ObjectToJsonTest {
                 = "{\"id\":1,\"firstName\":\"Dmitry\",\"lastName\":\"Klimov\",\"birthDate\":\"30-04-1998\"}";
         String jsonStr = ObjectToJson.toJson(director);
         assertEquals(expectedJsonStr, jsonStr);
-    }
-
-    @Test
-    void testDate() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        System.out.println(formatter.format(date));
-    }
-
-    @Test
-    void testSearchFilm() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        System.out.println(formatter.format(date));
     }
 }

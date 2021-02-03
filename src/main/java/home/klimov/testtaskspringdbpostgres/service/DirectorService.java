@@ -18,4 +18,6 @@ public interface DirectorService {
     List<Director> read(Director director);
 
     List<Director> read(String firstName, String lastName, Date birthDate);
+
+    List<Director> searchAllDirectors();
 }

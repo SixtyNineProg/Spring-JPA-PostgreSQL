@@ -168,11 +168,7 @@ public class HollywoodRestController {
             else films = filmService.searchFilmsByReleaseDateBetween(dateFrom, dateTo);
         }
         if (films != null) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (Film film : films) {
-                stringBuilder.append(ObjectToJson.filmToJson(film));
-            }
-            return ResponseEntity.ok(ObjectToJson.toJson(stringBuilder));
+            return ResponseEntity.ok(listFilmToString(films));
         } else return new ResponseEntity<>(Constants.FILMS_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
@@ -181,10 +177,30 @@ public class HollywoodRestController {
             @RequestParam(value = "name") String name) {
         name = name.trim() + "%";
         List<Film> films = filmService.searchFilmsByNameLike(name);
+        return ResponseEntity.ok(listFilmToString(films));
+    }
+
+    @GetMapping("/show_all_directors")
+    public ResponseEntity<?> showAllDirectors() {
+        List<Director> directors = directorService.searchAllDirectors();
+        return ResponseEntity.ok(listDirectorToString(directors));
+    }
+
+    @GetMapping("/show_all_films")
+    public ResponseEntity<?> showAllFilms() {
+        List<Film> films = filmService.searchAllFilms();
+        return ResponseEntity.ok(listFilmToString(films));
+    }
+
+    private String listFilmToString (List<Film> list) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Film film : films) {
-            stringBuilder.append(ObjectToJson.filmToJson(film));
-        }
-        return ResponseEntity.ok(ObjectToJson.toJson(stringBuilder));
+        for (Film film : list) stringBuilder.append(ObjectToJson.filmToJson(film)).append("<br>");
+        return stringBuilder.toString();
+    }
+
+    private String listDirectorToString (List<Director> list) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Director director : list) stringBuilder.append(ObjectToJson.toJson(director)).append("<br>");
+        return stringBuilder.toString();
     }
 }

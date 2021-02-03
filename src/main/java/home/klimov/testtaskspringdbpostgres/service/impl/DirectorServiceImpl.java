@@ -71,4 +71,11 @@ public class DirectorServiceImpl implements DirectorService {
         log.info(Constants.DIRECTORS_RECEIVED, directors.size());
         return directors;
     }
+
+    @Override
+    public List<Director> searchAllDirectors() {
+        List<Director> directors = directorRepository.findDirectorBy();
+        log.info(Constants.SEARCH_RESULT, directors.size());
+        return directors;
+    }
 }

@@ -1,5 +1,6 @@
 package home.klimov.testtaskspringdbpostgres.repository;
 
+import home.klimov.testtaskspringdbpostgres.entity.Director;
 import home.klimov.testtaskspringdbpostgres.entity.Film;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -59,4 +60,6 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
     List<Film> findFilmsByReleaseDateAfter(Date dateFrom);
 
     List<Film> findFilmsByNameLikeIgnoreCase(String name);
+
+    List<Film> findFilmBy();
 }
