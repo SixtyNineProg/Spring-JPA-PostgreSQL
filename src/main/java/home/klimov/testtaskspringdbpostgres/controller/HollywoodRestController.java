@@ -1,6 +1,6 @@
 package home.klimov.testtaskspringdbpostgres.controller;
 
-import home.klimov.testtaskspringdbpostgres.Utils.ObjectToJson;
+import home.klimov.testtaskspringdbpostgres.utils.ObjectToJson;
 import home.klimov.testtaskspringdbpostgres.constants.Constants;
 import home.klimov.testtaskspringdbpostgres.entity.Director;
 import home.klimov.testtaskspringdbpostgres.entity.Film;

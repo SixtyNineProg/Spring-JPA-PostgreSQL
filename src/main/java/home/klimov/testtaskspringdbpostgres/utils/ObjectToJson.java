@@ -1,4 +1,4 @@
-package home.klimov.testtaskspringdbpostgres.Utils;
+package home.klimov.testtaskspringdbpostgres.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -6,7 +6,6 @@ import home.klimov.testtaskspringdbpostgres.constants.Constants;
 import home.klimov.testtaskspringdbpostgres.entity.Director;
 import home.klimov.testtaskspringdbpostgres.entity.Film;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 
 @Slf4j
 public class ObjectToJson {

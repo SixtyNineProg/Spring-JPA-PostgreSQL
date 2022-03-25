@@ -1,4 +1,4 @@
-package home.klimov.testtaskspringdbpostgres.Utils;
+package home.klimov.testtaskspringdbpostgres.utils;
 
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;

@@ -1,4 +1,4 @@
-package home.klimov.testtaskspringdbpostgres.Utils;
+package home.klimov.testtaskspringdbpostgres.utils;
 
 import home.klimov.testtaskspringdbpostgres.constants.Constants;
 import home.klimov.testtaskspringdbpostgres.entity.Director;
@@ -14,9 +14,9 @@ class ObjectToJsonTest {
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
 
-    private Date date1 = simpleDateFormat.parse("30-04-1998");
+    private final Date date1 = simpleDateFormat.parse("30-04-1998");
 
-    private Director director = new Director(1, "Dmitry", "Klimov", date1);
+    private final Director director = new Director(1, "Dmitry", "Klimov", date1);
 
     ObjectToJsonTest() throws ParseException {
     }
