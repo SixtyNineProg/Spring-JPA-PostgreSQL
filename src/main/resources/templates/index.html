@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Hollywood</h1>
+<h2>Director</h2>
+<form action="/hollywood/create_director" method="GET">
+    <input type="submit" value="Add Director">
+</form>
+<br>
+<form action="/hollywood/delete_director" method="GET">
+    <input type="submit" value="Delete Director">
+</form>
+<br>
+<form action="/hollywood/read_director" method="GET">
+    <input type="submit" value="About Director">
+</form>
+<br>
+<form action="/hollywood/show_all_directors" method="GET">
+    <input type="submit" value="Show all Directors">
+</form>
+
+<h2>Film</h2>
+<form action="/hollywood/create_film" method="GET">
+    <input type="submit" value="Add film">
+</form>
+<br>
+<form action="/hollywood/delete_film" method="GET">
+    <input type="submit" value="Delete film">
+</form>
+<br>
+<form action="/hollywood/read_film" method="GET">
+    <input type="submit" value="About film">
+</form>
+<br>
+<form action="/hollywood/show_all_films" method="GET">
+    <input type="submit" value="Show all films">
+</form>
+
+<h2>Search film</h2>
+<form action="/hollywood/search" method="GET">
+    <p>Director last name : <label>
+        <input type="text" name="last_name"/>
+    </label></p>
+    <p>Date from: <label>
+        <input type="date" name="date_from"/>
+    </label></p>
+    <p>Date to: <label>
+        <input type="date" name="date_to"/>
+    </label></p>
+    <input type="submit" value="Search!">
+</form>
+<form action="/hollywood/search_films_by_name" method="GET">
+    <p>Film name : <label>
+        <input type="text" name="name"/>
+    </label></p>
+    <input type="submit" value="Search!">
+</form>
+</body>
+</html>

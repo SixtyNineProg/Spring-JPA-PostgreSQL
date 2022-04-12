@@ -9,5 +9,4 @@ public class TestTaskSpringDbPostgresApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TestTaskSpringDbPostgresApplication.class, args);
 	}
-
 }

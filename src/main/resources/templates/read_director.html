@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Director</title>
+</head>
+<body>
+<h1>About director</h1>
+<form action="/hollywood/read_director_by_id" method="POST">
+    <p>An identification number: <label>
+        <input type="number" name="id"/>
+    </label></p>
+    <input type="submit" value="Get info!">
+</form>
+<br>
+<form action="/hollywood/read_director" method="POST">
+    <p>First name: <label>
+        <input type="text" name="first_name"/>
+    </label></p>
+    <p>Last name: <label>
+        <input type="text" name="last_name"/>
+    </label></p>
+    <p>Birth date: <label>
+        <input type="date" name="birth_date"/>
+    </label></p>
+    <input type="submit" value="Get info!">
+</form>
+<br>
+<form action="/hollywood" method="GET">
+    <input type="submit" value="Back">
+</form>
+</body>
+</html>

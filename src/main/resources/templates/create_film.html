@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add film</title>
+</head>
+<body>
+<h1>Add film</h1>
+<form action="/hollywood/film" method="GET">
+    <p>Director:</p>
+    <p>First name: <label>
+        <input type="text" name="first_name"/>
+    </label></p>
+    <p>Last name: <label>
+        <input type="text" name="last_name"/>
+    </label></p>
+    <p>Birth date: <label>
+        <input type="date" name="birth_date"/>
+    </label></p>
+    <p>Film:</p>
+    <p>Name: <label>
+        <input type="text" name="name"/>
+    </label></p>
+    <p>Release date: <label>
+        <input type="date" name="release_date"/>
+    </label></p>
+    <p>Genre: <label>
+        <input type="text" name="genre"/>
+    </label></p>
+    <input type="submit" value="Create">
+</form>
+<br>
+<form action="/hollywood" method="GET">
+    <input type="submit" value="Back">
+</form>
+</body>
+</html>
